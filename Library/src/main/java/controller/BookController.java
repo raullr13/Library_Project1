@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import mapper.BookMapper;
+import model.Book;
 import service.book.BookService;
 import view.BookView;
 import view.model.BookDTO;
@@ -21,6 +22,8 @@ public class BookController {
         this.bookView.addSaveButtonListener(new SaveButtonListener());
         this.bookView.addSelectionTableListener(new SelectionTableListener());
         this.bookView.addDeleteButtonListener(new DeleteButtonListener());
+
+        this.bookView.addSellButtonListener(new SellButtonListener());
     }
 
     private class SaveButtonListener implements EventHandler<ActionEvent>{
@@ -34,18 +37,25 @@ public class BookController {
 
             if (title.isEmpty() || author.isEmpty() || priceText.isEmpty() || stockText.isEmpty()){
                 bookView.displayAlertMessage("Save Error", "Problem at various fields", "Can not have empty fields. Please fill in the fields before submitting Save!");
-                bookView.getBooksObservableList().get(0).setTitle("No Name");
             } else {
-                double price = Double.parseDouble(bookView.getPrice());
-                int stock = Integer.parseInt(bookView.getStock());
-                BookDTO bookDTO = new BookDTOBuilder().setAuthor(author).setTitle(title).setPrice(price).setStock(stock).build();
-                boolean savedBook = bookService.save(BookMapper.convertBookDTOToBook(bookDTO));
+                try {
+                    double price = Double.parseDouble(bookView.getPrice());
+                    int stock = Integer.parseInt(bookView.getStock());
+                    BookDTO bookDTO = new BookDTOBuilder().setAuthor(author).setTitle(title).setPrice(price).setStock(stock).build();
 
-                if (savedBook) {
-                    bookView.displayAlertMessage("Save Successful", "Book Added", "Book was successfully added to the database.");
-                    bookView.addBookToObservableList(bookDTO);
-                } else {
-                    bookView.displayAlertMessage("Save Not Successful", "Book was not added", "There was a problem at adding the book into the database.");
+                    Book bookEntity = BookMapper.convertBookDTOToBook(bookDTO);
+
+                    boolean savedBook = bookService.save(bookEntity);
+
+                    if (savedBook) {
+                        bookView.displayAlertMessage("Save Successful", "Book Added", "Book was successfully added to the database.");
+                        bookDTO.setId(bookEntity.getId());
+                        bookView.addBookToObservableList(bookDTO);
+                    } else {
+                        bookView.displayAlertMessage("Save Not Successful", "Book was not added", "There was a problem at adding the book into the database.");
+                    }
+                }catch (NumberFormatException e){
+                    bookView.displayAlertMessage("Input error", "Invalid input", "Check your inputs!");
                 }
             }
         }
@@ -74,6 +84,30 @@ public class BookController {
                 }
             } else {
                 bookView.displayAlertMessage("Deletion not successful", "Deletion Process", "You need to select a row from table before pressing the delete button!");
+            }
+        }
+    }
+
+    private class SellButtonListener implements EventHandler<ActionEvent>{
+        @Override
+        public void handle(ActionEvent event) {
+            BookDTO bookDTO = (BookDTO) bookView.getBookTableView().getSelectionModel().getSelectedItem();
+
+            if(bookDTO != null){
+                boolean sellSuccess = bookService.sell(BookMapper.convertBookDTOToBook(bookDTO));
+
+                if(sellSuccess){
+                    bookDTO.setStock(bookDTO.getStock() - 1);
+                    bookView.displayAlertMessage("Success", "Book Sold", "Stock decremented");
+                }
+                else
+                {
+                    bookView.displayAlertMessage("Error", "Sell failed", "Couldn't complete the sale");
+                }
+            }
+            else
+            {
+                bookView.displayAlertMessage("Error", "No selection", "Please select a book first!");
             }
         }
     }

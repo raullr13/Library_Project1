@@ -27,6 +27,7 @@ public class BookView {
     private Label titleLabel;
     private Button saveButton;
     private Button deleteButton;
+    private Button sellButton;
 
     public BookView(Stage primaryStage, List<BookDTO> bookDTOS){
         primaryStage.setTitle("Library");
@@ -99,6 +100,9 @@ public class BookView {
         gridPane.add(stockLabel, 3, 2);
         stockTextField = new TextField();
         gridPane.add(stockTextField,4,2);
+
+        sellButton = new Button("Sell");
+        gridPane.add(sellButton, 7,1);
     }
 
     private void initializeGridPane(GridPane gridPane){
@@ -118,6 +122,10 @@ public class BookView {
 
     public void addDeleteButtonListener(EventHandler<ActionEvent> deleteButtonListener){
         deleteButton.setOnAction(deleteButtonListener);
+    }
+
+    public void addSellButtonListener(EventHandler<ActionEvent> sellButtonListener){
+        sellButton.setOnAction(sellButtonListener);
     }
 
     public void displayAlertMessage(String titleInformation, String headerInformation, String contextInformation){

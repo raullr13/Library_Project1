@@ -70,7 +70,7 @@ public class BookRepositoryMySQL implements BookRepository {
         }
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, book.getAuthor());
             preparedStatement.setString(2, book.getTitle());
             preparedStatement.setDate(3, java.sql.Date.valueOf(book.getPublishedDate()));
@@ -83,6 +83,15 @@ public class BookRepositoryMySQL implements BookRepository {
             }
 
             int rowsInserted = preparedStatement.executeUpdate();
+
+            if(rowsInserted == 1 &&(book.getId() == null || book.getId() <= 0))
+            {
+                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                if(generatedKeys.next())
+                {
+                    book.setId(generatedKeys.getLong(1));
+                }
+            }
 
             return (rowsInserted != 1) ? false : true;
 
