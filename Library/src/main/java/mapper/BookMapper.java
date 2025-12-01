@@ -1,0 +1,44 @@
+package mapper;
+
+import model.Book;
+import model.builder.BookBuilder;
+import view.model.BookDTO;
+import view.model.builder.BookDTOBuilder;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class BookMapper {
+
+    public static BookDTO convertBookToBookDTO(Book book){
+        BookDTOBuilder builder = new BookDTOBuilder()
+                .setAuthor(book.getAuthor())
+                .setTitle(book.getTitle())
+                .setPrice(book.getPrice())
+                .setStock(book.getStock());
+        BookDTO dto = builder.build();
+        dto.setId(book.getId());
+        return dto;
+    }
+
+    public static Book convertBookDTOToBook(BookDTO bookDTO){
+        return new BookBuilder().setAuthor(bookDTO.getAuthor())
+                .setId(bookDTO.getId())
+                .setAuthor(bookDTO.getAuthor())
+                .setTitle(bookDTO.getTitle())
+                .setPrice(bookDTO.getPrice())
+                .setPublishedDate(LocalDate.of(2010, 10, 2))
+                .setPrice(bookDTO.getPrice())
+                .setStock(bookDTO.getStock())
+                .build();
+    }
+
+    public static List<Book> convertBookDTOListToBookList(List<BookDTO> bookDTOS){
+        return bookDTOS.parallelStream().map(BookMapper::convertBookDTOToBook).collect(Collectors.toList());
+    }
+
+    public static List<BookDTO> convertBookListToBookDTOList(List<Book> books){
+        return books.parallelStream().map(BookMapper::convertBookToBookDTO).collect(Collectors.toList());
+    }
+}
