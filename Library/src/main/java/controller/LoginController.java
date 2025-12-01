@@ -1,6 +1,7 @@
 package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import launcher.AdminComponentFactory;
 import launcher.CustomerComponentFactory;
 import launcher.EmployeeComponentFactory;
 import launcher.LoginComponentFactory;
@@ -51,6 +52,8 @@ public class LoginController {
                         CustomerComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
                         break;
                     case ADMINISTRATOR:
+                        new AdminComponentFactory(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                        break;
                     case EMPLOYEE:
                         EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
                         break;

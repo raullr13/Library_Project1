@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import static database.Constants.Tables.USER;
@@ -23,11 +24,6 @@ public class UserRepositoryMySQL implements UserRepository {
     public UserRepositoryMySQL(Connection connection, RightsRolesRepository rightsRolesRepository) {
         this.connection = connection;
         this.rightsRolesRepository = rightsRolesRepository;
-    }
-
-    @Override
-    public List<User> findAll() {
-        return null;
     }
 
     // SQL Injection Attacks should not work after fixing functions
@@ -113,6 +109,45 @@ public class UserRepositoryMySQL implements UserRepository {
             return userResultSet.next();
 
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<User> findAll()
+    {
+        List<User> users = new ArrayList<>();
+        try{
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM user";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while(resultSet.next())
+            {
+                User user = new UserBuilder()
+                        .setId(resultSet.getLong("id"))
+                        .setUsername(resultSet.getString("username"))
+                        .setPassword(resultSet.getString("password"))
+                        .setRoles(rightsRolesRepository.findRolesForUser(resultSet.getLong("id")))
+                        .build();
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
+    public boolean delete(Long id)
+    {
+        try{
+            String sql = "DELETE FROM user WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1,id);
+            return statement.executeUpdate() > 0;
+        }catch(SQLException e){
             e.printStackTrace();
             return false;
         }
