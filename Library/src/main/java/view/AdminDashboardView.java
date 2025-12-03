@@ -14,6 +14,7 @@ public class AdminDashboardView {
 
     private final Button manageBooksButton;
     private final Button manageUsersButton;
+    private final Button generateReportButton;
 
     public AdminDashboardView(Stage primaryStage) {
         primaryStage.setTitle("Admin Dashboard");
@@ -28,7 +29,9 @@ public class AdminDashboardView {
         manageUsersButton = new Button("Manage Users");
         manageUsersButton.setStyle("-fx-font-size: 16px; -fx-min-width: 200px; -fx-min-height: 50px;");
 
-        layout.getChildren().addAll(label, manageBooksButton, manageUsersButton);
+        generateReportButton = new Button("Generate Report");
+        generateReportButton.setStyle("-fx-font-size: 16px; -fx-min-width: 200px; -fx-min-height: 50px;");
+        layout.getChildren().addAll(label, manageBooksButton, manageUsersButton, generateReportButton);
         Scene scene = new Scene(layout, 400,300);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -42,5 +45,9 @@ public class AdminDashboardView {
     public void addManageUsersListener(EventHandler<ActionEvent> listener)
     {
         manageUsersButton.setOnAction(listener);
+    }
+
+    public void addGenerateReportListener(EventHandler<ActionEvent> listener){
+        generateReportButton.setOnAction(listener);
     }
 }

@@ -46,16 +46,16 @@ public class LoginController {
                 //EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
                 User user = loginNotification.getResult();
                 String role = user.getRoles().get(0).getRole();
-
+                Long userId = user.getId();
                 switch (role){
                     case CUSTOMER:
-                        CustomerComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                        CustomerComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage(), userId);
                         break;
                     case ADMINISTRATOR:
-                        new AdminComponentFactory(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                        new AdminComponentFactory(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage(), userId);
                         break;
                     case EMPLOYEE:
-                        EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                        EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage(), userId);
                         break;
                     default:
                         loginView.setActionTargetText("Invalid role!");

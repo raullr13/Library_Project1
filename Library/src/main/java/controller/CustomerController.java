@@ -12,10 +12,12 @@ import java.awt.event.ActionListener;
 public class CustomerController {
     private final CustomerBookView customerView;
     private final BookService bookService;
+    private final Long currentUserId;
 
-    public CustomerController(CustomerBookView customerView, BookService bookService) {
+    public CustomerController(CustomerBookView customerView, BookService bookService, Long currentUserId) {
         this.customerView = customerView;
         this.bookService = bookService;
+        this.currentUserId = currentUserId;
 
         this.customerView.addBuyButtonListener(new BuyButtonListener());
     }
@@ -27,7 +29,7 @@ public class CustomerController {
             BookDTO selectedBook = customerView.getSelectedBook();
             if(selectedBook != null)
             {
-                boolean success = bookService.sell(BookMapper.convertBookDTOToBook(selectedBook));
+                boolean success = bookService.sell(BookMapper.convertBookDTOToBook(selectedBook), currentUserId);
 
                 if(success)
                 {

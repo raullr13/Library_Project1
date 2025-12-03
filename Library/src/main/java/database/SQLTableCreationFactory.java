@@ -1,11 +1,6 @@
 package database;
 
-import static database.Constants.Tables.BOOK;
-import static database.Constants.Tables.RIGHT;
-import static database.Constants.Tables.ROLE;
-import static database.Constants.Tables.ROLE_RIGHT;
-import static database.Constants.Tables.USER;
-import static database.Constants.Tables.USER_ROLE;
+import static database.Constants.Tables.*;
 
 public class SQLTableCreationFactory {
 
@@ -76,6 +71,18 @@ public class SQLTableCreationFactory {
                     "    REFERENCES role (id)" +
                     "    ON DELETE CASCADE" +
                     "    ON UPDATE CASCADE);";
+            // Inside database/SQLTableCreationFactory.java
+
+            case SALE -> "CREATE TABLE IF NOT EXISTS sale (" +
+                    "  id INT NOT NULL AUTO_INCREMENT," +
+                    "  book_id BIGINT NOT NULL," +
+                    "  user_id INT NOT NULL," +
+                    "  sold_date DATETIME DEFAULT CURRENT_TIMESTAMP," +
+                    "  price DECIMAL(10, 2) NOT NULL," +
+                    "  PRIMARY KEY (id)," +
+                    "  CONSTRAINT fk_sale_book FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE," +
+                    "  CONSTRAINT fk_sale_user FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
             default -> "";
         };
     }

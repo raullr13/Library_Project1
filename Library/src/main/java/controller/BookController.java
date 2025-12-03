@@ -14,11 +14,12 @@ import view.model.builder.BookDTOBuilder;
 public class BookController {
     private final BookView bookView;
     private final BookService bookService;
+    private final Long currentUserId;
 
-    public BookController(BookView bookView, BookService bookService){
+    public BookController(BookView bookView, BookService bookService, Long userId){
         this.bookView = bookView;
         this.bookService = bookService;
-
+        this.currentUserId = userId;
         this.bookView.addSaveButtonListener(new SaveButtonListener());
         this.bookView.addSelectionTableListener(new SelectionTableListener());
         this.bookView.addDeleteButtonListener(new DeleteButtonListener());
@@ -94,7 +95,7 @@ public class BookController {
             BookDTO bookDTO = (BookDTO) bookView.getBookTableView().getSelectionModel().getSelectedItem();
 
             if(bookDTO != null){
-                boolean sellSuccess = bookService.sell(BookMapper.convertBookDTOToBook(bookDTO));
+                boolean sellSuccess = bookService.sell(BookMapper.convertBookDTOToBook(bookDTO), currentUserId);
 
                 if(sellSuccess){
                     bookDTO.setStock(bookDTO.getStock() - 1);
