@@ -1,23 +1,18 @@
 package database;
 
-import static database.Constants.Tables.BOOK;
-import static database.Constants.Tables.RIGHT;
-import static database.Constants.Tables.ROLE;
-import static database.Constants.Tables.ROLE_RIGHT;
-import static database.Constants.Tables.USER;
-import static database.Constants.Tables.USER_ROLE;
+import static database.Constants.Tables.*;
 
 public class SQLTableCreationFactory {
 
     public String getCreateSQLForTable(String table) {
         return switch (table) {
             case BOOK -> "CREATE TABLE IF NOT EXISTS book (" +
-                    "  id int(11) NOT NULL AUTO_INCREMENT," +
+                    "  id bigint NOT NULL AUTO_INCREMENT," +
                     "  author varchar(500) NOT NULL," +
                     "  title varchar(500) NOT NULL," +
                     "  publishedDate datetime DEFAULT NULL," +
-                    " price DECIMAL(10,2) NOT NULL DEFAULT 0.00," +
-                    " stock INT NOT NULL DEFAULT 0," +
+                    "  price DECIMAL(10,2) NOT NULL DEFAULT 0.00," +
+                    "  stock INT NOT NULL DEFAULT 0," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)" +
                     ") ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;";
@@ -76,6 +71,17 @@ public class SQLTableCreationFactory {
                     "    REFERENCES role (id)" +
                     "    ON DELETE CASCADE" +
                     "    ON UPDATE CASCADE);";
+
+            case SALE -> "CREATE TABLE IF NOT EXISTS sale (" +
+                    "  id INT NOT NULL AUTO_INCREMENT," +
+                    "  book_id BIGINT NOT NULL," +
+                    "  user_id INT NOT NULL," +
+                    "  sold_date DATETIME DEFAULT CURRENT_TIMESTAMP," +
+                    "  price DECIMAL(10, 2) NOT NULL," +
+                    "  PRIMARY KEY (id)," +
+                    "  CONSTRAINT fk_sale_book FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE," +
+                    "  CONSTRAINT fk_sale_user FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
             default -> "";
         };
     }

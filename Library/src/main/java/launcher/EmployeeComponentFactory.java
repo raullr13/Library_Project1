@@ -8,6 +8,8 @@ import repository.book.BookRepository;
 import repository.book.BookRepositoryCacheDecorator;
 import repository.book.BookRepositoryMySQL;
 import repository.book.Cache;
+import repository.sale.SaleRepository;
+import repository.sale.SaleRepositoryMySQL;
 import service.book.BookService;
 import service.book.BookServiceImpl;
 import view.BookView;
@@ -23,21 +25,20 @@ public class EmployeeComponentFactory {
     private final BookRepository bookRepository;
     private final BookService bookService;
     private static EmployeeComponentFactory instance;
+    private final SaleRepository saleRepository;
 
-    public static EmployeeComponentFactory getInstance(Boolean componentsForTest, Stage stage){
-        if (instance == null){
-            instance = new EmployeeComponentFactory(componentsForTest, stage);
-        }
-        return instance;
+    public static EmployeeComponentFactory getInstance(Boolean componentsForTest, Stage stage, Long currentUserId){
+        return new EmployeeComponentFactory(componentsForTest,stage,currentUserId);
     }
 
-    public EmployeeComponentFactory(Boolean componentsForTest, Stage stage){
+    public EmployeeComponentFactory(Boolean componentsForTest, Stage stage, Long currentUserId){
         Connection connection = DatabaseConnectionFactory.getConnectionWrapper(componentsForTest).getConnection();
         this.bookRepository = new BookRepositoryCacheDecorator(new BookRepositoryMySQL(connection), new Cache<>());
-        this.bookService = new BookServiceImpl(bookRepository);
+        this.saleRepository = new SaleRepositoryMySQL(connection);
+        this.bookService = new BookServiceImpl(bookRepository, saleRepository);
         List<BookDTO> bookDTOs = BookMapper.convertBookListToBookDTOList(this.bookService.findAll());
         this.bookView = new BookView(stage, bookDTOs);
-        this.bookController = new BookController(bookView, bookService);
+        this.bookController = new BookController(bookView, bookService, currentUserId);
     }
 
     public BookView getBookView() {

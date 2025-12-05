@@ -8,5 +8,5 @@ public interface BookService {
     boolean save(Book book);
     boolean delete(Book book);
     int getAgeOfBook(Long id);
-    boolean sell(Book book);
+    boolean sell(Book book, Long id);
 }

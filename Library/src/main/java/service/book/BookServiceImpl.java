@@ -1,14 +1,19 @@
 package service.book;
 import model.Book;
+import model.Sale;
 import repository.book.BookRepository;
+import repository.sale.SaleRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 public class BookServiceImpl implements BookService{
     private final BookRepository bookRepository;
-    public BookServiceImpl(BookRepository bookRepository){
+    private final SaleRepository saleRepository;
+
+    public BookServiceImpl(BookRepository bookRepository, SaleRepository saleRepository) {
         this.bookRepository = bookRepository;
+        this.saleRepository = saleRepository;
     }
     @Override
     public List<Book> findAll() {
@@ -37,14 +42,20 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public boolean sell(Book book) {
+    public boolean sell(Book book, Long userId) {
         Book newBook = bookRepository.findById(book.getId())
                 .orElse(null);
 
         if(newBook != null && newBook.getStock() > 0) {
             newBook.setStock(newBook.getStock() - 1);
-            return bookRepository.save(newBook);
+            boolean stockUpdated = bookRepository.save(newBook);
+
+            if(stockUpdated) {
+                Sale sale = new Sale(newBook.getId(), userId, newBook.getPrice());
+                return saleRepository.save(sale);
+            }
         }
         return false;
     }
+
 }
