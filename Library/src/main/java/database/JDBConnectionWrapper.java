@@ -41,6 +41,8 @@ public class JDBConnectionWrapper {
                 " id bigint NOT NULL AUTO_INCREMENT," +
                 " author varchar(500) NOT NULL," +
                 " title varchar(500) NOT NULL," +
+                "  price DECIMAL(10,2) NOT NULL DEFAULT 0.00," +
+                "  stock INT NOT NULL DEFAULT 0," +
                 " publishedDate datetime DEFAULT NULL," +
                 " PRIMARY KEY(id)," +
                 " UNIQUE KEY id_UNIQUE(id)" +

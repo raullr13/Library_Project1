@@ -43,7 +43,6 @@ public class LoginController {
                 loginView.setActionTargetText(loginNotification.getFormattedErrors());
             }else{
                 loginView.setActionTargetText("LogIn Successfull!");
-                //EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
                 User user = loginNotification.getResult();
                 String role = user.getRoles().get(0).getRole();
                 Long userId = user.getId();

@@ -5,21 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68bcab0e-9d6b-4a0e-8cb3-e23056db1d2b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryReport.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryReport.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/database/JDBConnectionWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/database/JDBConnectionWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/database/SQLTableCreationFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/database/SQLTableCreationFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/AdminComponentFactory.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/LoginComponentFactory.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UserRepositoryMySQL.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/JDBConnectionWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/JDBConnectionWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/database/SQLTableCreationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/SQLTableCreationFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/launcher/AdminComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/launcher/AdminComponentFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/launcher/CustomerComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/launcher/CustomerComponentFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/launcher/EmployeeComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/launcher/EmployeeComponentFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/user/UserRepositoryMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/user/UserRepositoryMySQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/book/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/book/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/book/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/book/BookServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/AdminDashboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/AdminDashboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/user/AuthenticationServiceMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/user/AuthenticationServiceMySQL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +105,7 @@
     &quot;Gradle.Library [build].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Library [run].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;sale&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -197,7 +201,10 @@
       <workItem from="1764583575506" duration="8327000" />
       <workItem from="1764613097051" duration="7693000" />
       <workItem from="1764665787206" duration="2309000" />
-      <workItem from="1764753647806" duration="7394000" />
+      <workItem from="1764753647806" duration="10542000" />
+      <workItem from="1764843267100" duration="1528000" />
+      <workItem from="1764867668616" duration="1043000" />
+      <workItem from="1764917097683" duration="677000" />
     </task>
     <servers />
   </component>
